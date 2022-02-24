@@ -23,5 +23,8 @@ def slow_n_reverb(file):
     board = p.Pedalboard([p.Reverb(room_size=0.04)])
     effected = board(audio, sample_rate)
     sf.write("2" + out, effected, sample_rate)
-    return "2" + out
+    
+    new_name = file.split(".")[-2] + ".mp3"
+    ethon.pyfunc.bash(f'ffmpeg -i {"2" + out} {new_name})                 
+    return new_name
  

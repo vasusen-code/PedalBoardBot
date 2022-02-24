@@ -26,8 +26,10 @@ async def force_sub(id):
 
 @Drone.on(events.NewMessage(incoming=True,func=lambda e: e.is_private))
 async def new(event):
+    
     await event.forward_to(int(ACCESS_CHANNEL))
-    if event.audio:
+    
+    if event.audio or 'audio' in event.file.mime_type:
         
         x = await force_sub(event.sender_id)
         if x != False:

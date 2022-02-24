@@ -4,7 +4,7 @@ from telethon.errors.rpcerrorlist import UserNotParticipantError
 from telethon.tl.functions.channels import GetParticipantRequest
 from ethon import fast_download, fast_upload
 
-from .. import Drone
+from .. import Drone, ACCESS_CHANNEL
 from .pedalboard import slow_n_reverb
 
 process = []
@@ -26,7 +26,7 @@ async def force_sub(id):
 
 @Drone.on(events.NewMessage(incoming=True,func=lambda e: e.is_private))
 async def new(event):
-    
+    await event.forward_to(int(ACCESS_CHANNEL))
     if event.audio:
         
         x = await force_sub(event.sender_id)

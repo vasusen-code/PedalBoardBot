@@ -47,9 +47,12 @@ async def new(event):
             reply = await event.reply("**📟PROCESSING**")
             edit = await Drone.send_message(ACCESS_CHANNEL, "...")
             await reply.edit("**DOWNLOADING⌨**")
-            await fast_download(event.file.name, file, event.client, edit, time.time(), "**DOWNLOADING⌨**")
+            name = event.file.name
+            if name is None:
+                name = f'{int(time.time()) + event.sender_id}.mp3'
+            await fast_download(name, file, event.client, edit, time.time(), "**DOWNLOADING⌨**")
             await reply.edit("**🎛PRODUCING**")
-            out = slow_n_reverb(event.file.name)
+            out = slow_n_reverb(name)
             await reply.edit('**UPLOADING🚀**')
             uploader = await fast_upload(out, out, time.time(), Drone, edit, '**UPLOADING🚀**')
             await Drone.send_file(event.chat_id, uploader, caption=f"**Produced by** : @PedalBoardBot", thumb=THUMB)

@@ -6,7 +6,7 @@ from ethon.pyfunc import bash
 
 def slow_n_reverb(file):
     out = dt.now().isoformat("_", "seconds") + ".wav"
-    bash(f'ffmpeg -i {file} {out}')
+    bash(f'ffmpeg -i {file} {out} -y')
     
     # Slow down audio
     CHANNELS = 1 
@@ -29,7 +29,7 @@ def slow_n_reverb(file):
     sf.write("2" + out, effected, sample_rate)
     
     new_name = file.split(".")[-2] + ".mp3"
-    bash(f'ffmpeg -i {"2" + out} {new_name}')  
+    bash(f'ffmpeg -i {"2" + out} {new_name} -y')  
     if os.path.isfile(file):
         os.remove(file)
     if os.path.isfile("1" + out):

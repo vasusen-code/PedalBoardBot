@@ -37,6 +37,10 @@ async def new(event):
             return event.reply("Wait until your previous process finish!🕰")
         
         try:
+            if hasattr(msg.media, "document"):
+                file = msg.media.document
+            else:
+                file = msg.media
             process.append(int(event.sender_id))
             reply = await event.reply("**📟PROCESSING**")
             edit = await Drone.send_message(ACCESS_CHANNEL, "...")

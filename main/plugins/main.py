@@ -1,5 +1,5 @@
 import time
-from telethon import events
+from telethon import events, Button
 from telethon.errors.rpcerrorlist import UserNotParticipantError
 from telethon.tl.functions.channels import GetParticipantRequest
 from ethon import fast_download, fast_upload

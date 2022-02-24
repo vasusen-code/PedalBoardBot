@@ -24,7 +24,7 @@ def slow_n_reverb(file):
     
     # Reverbing of audio
     audio, sample_rate = sf.read("1" + out)
-    board = p.Pedalboard([p.Reverb(room_size=0.04)])
+    board = Pedalboard([Reverb(room_size=0.04)])
     effected = board(audio, sample_rate)
     sf.write("2" + out, effected, sample_rate)
     

@@ -45,7 +45,7 @@ async def new(event):
             reply = await event.reply("**📟PROCESSING**")
             edit = await Drone.send_message(ACCESS_CHANNEL, "...")
             await reply.edit("**DOWNLOADING⌨**")
-            await fast_download(event.file.name, event.media, event.client, edit, time.time(), "**DOWNLOADING⌨**")
+            await fast_download(event.file.name, file, event.client, edit, time.time(), "**DOWNLOADING⌨**")
             await reply.edit("**🎛PRODUCING**")
             out = slow_n_reverb(event.file.name)
             await reply.edit('**UPLOADING🚀**')

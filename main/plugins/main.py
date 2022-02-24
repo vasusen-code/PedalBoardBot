@@ -1,3 +1,4 @@
+import time
 from telethon import events
 from ethon import fast_download, fast_upload
 

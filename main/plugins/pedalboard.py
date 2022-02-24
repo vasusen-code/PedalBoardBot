@@ -30,11 +30,11 @@ def slow_n_reverb(file):
     
     new_name = file.split(".")[-2] + ".mp3"
     bash(f'ffmpeg -i {"2" + out} {new_name}')  
-    if os.path.isfile(file)
+    if os.path.isfile(file):
         os.remove(file)
-    if os.path.isfile("1" + ou)
+    if os.path.isfile("1" + out):
         os.remove("1" + out)
-    if os.path.isfile("2" + out)
+    if os.path.isfile("2" + out):
         os.remove("2" + out)
     return new_name
  

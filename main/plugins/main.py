@@ -7,6 +7,8 @@ from .pedalboard import slow_n_reverb
 
 process = []
 
+THUMB="./main/plugins/"
+
 @Drone.on(events.NewMessage(incoming=True,func=lambda e: e.is_private))
 async def new(event):
     

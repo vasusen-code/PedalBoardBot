@@ -38,8 +38,9 @@ async def new(event):
         
         try:
             process.append(int(event.sender_id))
-            reply = await event.reply("📟Processing...")
+            reply = await event.reply("**📟Processing...**")
             await fast_download(event.file.name, event.media, event.client, reply, time.time(), "**DOWNLOADING⌨**")
+            await reply.edit("**🎛Producing...**")
             out = slow_n_reverb(event.file.name)
             uploader = await fast_upload(out, out, time.time(), Drone, reply, '**UPLOADING🚀**')
             await Drone.send_file(event.chat_id, uploader, caption=f"**Produced by** : @PedalBoardBot", thumb=THUMB)

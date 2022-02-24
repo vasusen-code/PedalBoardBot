@@ -1,7 +1,7 @@
 import os, wave, soundfile as sf
 
 from datetime import datetime as dt
-from pedalboard import PedalBoard, reverb
+from pedalboard import Pedalboard, Reverb
 from ethon.pyfunc import bash
 
 def slow_n_reverb(file):

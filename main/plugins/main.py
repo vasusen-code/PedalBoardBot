@@ -2,7 +2,7 @@ import time
 from telethon import events, Button
 from telethon.errors.rpcerrorlist import UserNotParticipantError
 from telethon.tl.functions.channels import GetParticipantRequest
-from ethon import fast_download, fast_upload
+from ethon.telefunc import fast_download, fast_upload
 
 from .. import Drone, ACCESS_CHANNEL
 from .pedalboard import slow_n_reverb

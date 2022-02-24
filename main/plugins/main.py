@@ -9,7 +9,7 @@ from .pedalboard import slow_n_reverb
 
 process = []
 
-THUMB="./main/plugins/"
+THUMB="./main/plugins/Jefs-Budget-Effects-Pedals-1-770x425.jpg"
 
 async def force_sub(id):
     ok = False

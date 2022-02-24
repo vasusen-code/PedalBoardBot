@@ -1,2 +1,7 @@
 python-decouple
 telethon
+ethon
+cyptg
+git+https://github.com/bastibe/python-soundfile
+pedalboard
+wave

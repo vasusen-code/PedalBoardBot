@@ -38,13 +38,18 @@ async def new(event):
         
         try:
             process.append(int(event.sender_id))
-            reply = await event.reply("**📟Processing...**")
-            await fast_download(event.file.name, event.media, event.client, reply, time.time(), "**DOWNLOADING⌨**")
-            await reply.edit("**🎛Producing...**")
+            reply = await event.reply("**📟PROCESSING**")
+            edit = await Drone.send_message(ACCESS_CHANNEL, "...")
+            await reply.edit("**DOWNLOADING⌨**")
+            await fast_download(event.file.name, event.media, event.client, edit, time.time(), "**DOWNLOADING⌨**")
+            await reply.edit("**🎛PRODUCING**")
             out = slow_n_reverb(event.file.name)
-            uploader = await fast_upload(out, out, time.time(), Drone, reply, '**UPLOADING🚀**')
+            await reply.edit('**UPLOADING🚀**')
+            uploader = await fast_upload(out, out, time.time(), Drone, edit, '**UPLOADING🚀**')
             await Drone.send_file(event.chat_id, uploader, caption=f"**Produced by** : @PedalBoardBot", thumb=THUMB)
             process.pop(process.index(int(event.sender_id)))
+            await reply.delete()
+            await edit.delete()
         except Exception as e:
             process.pop(process.index(int(event.sender_id)))
             print(e)

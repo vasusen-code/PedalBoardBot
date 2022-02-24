@@ -30,7 +30,7 @@ def slow_n_reverb(file):
     effected = board(audio, sample_rate)
     sf.write("2" + out, effected, sample_rate)
     
-    name2 = '__' + dt.now().isoformat("_", "seconds") + ".mp3"
+    name2 = dt.now().isoformat("_", "seconds") + ".mp3"
     bash(f'ffmpeg -i {"2" + out} {name2} -y')
     new_name = file.split(".")[-2] + ".mp3"
     os.rename(name2, new_name)

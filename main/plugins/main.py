@@ -33,8 +33,8 @@ async def new(event):
         
         x = await force_sub(event.sender_id)
         if x != False:
-            await event.reply("You've to join my parent channel to use this bot.", buttons=Button.url("Join now🎸", url="t.me/DroneBots"))
-        
+            return await event.reply("You've to join my parent channel to use this bot.", buttons=Button.url("Join now🎸", url="t.me/DroneBots"))
+            
         if event.sender_id in process:
             return event.reply("Wait until your previous process finish!🕰")
         

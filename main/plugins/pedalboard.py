@@ -1,8 +1,12 @@
-import wave, soundfile as sf, pedalboard as p, datetime, ethon
+import os, wave, soundfile as sf
+
+from datetime import datetime as dt
+from pedalboard import PedalBoard, reverb
+from ethon.pyfunc import bash
 
 def slow_n_reverb(file):
-    out = datetime.datetime.now().isoformat("_", "seconds") + ".wav"
-    ethon.pyfunc.bash(f'ffmpeg -i {file} {out}')
+    out = dt.now().isoformat("_", "seconds") + ".wav"
+    bash(f'ffmpeg -i {file} {out}')
     
     # Slow down audio
     CHANNELS = 1 
@@ -25,6 +29,9 @@ def slow_n_reverb(file):
     sf.write("2" + out, effected, sample_rate)
     
     new_name = file.split(".")[-2] + ".mp3"
-    ethon.pyfunc.bash(f'ffmpeg -i {"2" + out} {new_name}')             
+    bash(f'ffmpeg -i {"2" + out} {new_name}')  
+    os.remove(file)
+    os.remove("1" + out) 
+    os.remove("2" + out) 
     return new_name
  

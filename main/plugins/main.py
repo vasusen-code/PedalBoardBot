@@ -1,5 +1,7 @@
 import time
 from telethon import events
+from telethon.errors.rpcerrorlist import UserNotParticipantError
+from telethon.tl.functions.channels import GetParticipantRequest
 from ethon import fast_download, fast_upload
 
 from .. import Drone
@@ -9,10 +11,27 @@ process = []
 
 THUMB="./main/plugins/"
 
+async def force_sub(id):
+    ok = False
+    try:
+        x = await Drone(GetParticipantRequest(channel="DroneBots", participant=int(id)))
+        left = x.stringify()
+        if 'left' in left:
+            ok = True
+        else:
+            ok = False
+    except UserNotParticipantError:
+        ok = True 
+    return ok
+
 @Drone.on(events.NewMessage(incoming=True,func=lambda e: e.is_private))
 async def new(event):
     
     if event.audio:
+        
+        x = await force_sub(event.sender_id)
+        if x != False:
+            await event.reply("You've to join my parent channel to use this bot.", buttons=Button.url("Join now🎸", url="t.me/DroneBots"))
         
         if event.sender_id in process:
             return event.reply("Wait until your previous process finish!🕰")

@@ -39,11 +39,11 @@ async def new(event):
             return event.reply("Wait until your previous process finish!🕰")
         
         try:
-            if hasattr(msg.media, "document"):
-                file = msg.media.document
-            else:
-                file = msg.media
             process.append(int(event.sender_id))
+            if hasattr(event.media, "document"):
+                file = event.media.document
+            else:
+                file = event.media
             reply = await event.reply("**📟PROCESSING**")
             edit = await Drone.send_message(ACCESS_CHANNEL, "...")
             await reply.edit("**DOWNLOADING⌨**")
@@ -59,7 +59,7 @@ async def new(event):
         except Exception as e:
             process.pop(process.index(int(event.sender_id)))
             print(e)
-            await reply.edit("Sorry! but Something went wrong, contact @TeamDrone.")
+            await reply.edit(f"Sorry! but Something went wrong, contact @TeamDrone.\n\n**ERROR:** {str(e)}")
             
             
                 

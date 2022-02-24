@@ -5,8 +5,10 @@ from pedalboard import Pedalboard, Reverb
 from ethon.pyfunc import bash
 
 def slow_n_reverb(file):
+    mp3 = dt.now().isoformat("_", "seconds") + ".mp3"
     out = dt.now().isoformat("_", "seconds") + ".wav"
-    bash(f'ffmpeg -i {file} {out} -y')
+    os.rename(file, mp3)
+    bash(f'ffmpeg -i {mp3} {out} -y')
     
     # Slow down audio
     CHANNELS = 1 
@@ -28,7 +30,9 @@ def slow_n_reverb(file):
     effected = board(audio, sample_rate)
     sf.write("2" + out, effected, sample_rate)
     
+    name2 = '__' + dt.now().isoformat("_", "seconds") + ".mp3"
+    bash(f'ffmpeg -i {"2" + out} {name2} -y')
     new_name = file.split(".")[-2] + ".mp3"
-    bash(f'ffmpeg -i {"2" + out} {new_name} -y')  
+    os.rename(name2, new_name)
     return new_name
  

@@ -11,7 +11,7 @@ def slow_n_reverb(file):
     # Slow down audio
     CHANNELS = 1 
     swidth = 4
-    Change_RATE = 0.75
+    Change_RATE = 0.77
     spf = wave.open(out, 'rb')
     RATE=spf.getframerate() 
     signal = spf.readframes(-1) 
@@ -24,7 +24,7 @@ def slow_n_reverb(file):
     
     # Reverbing of audio
     audio, sample_rate = sf.read("1" + out)
-    board = Pedalboard([Reverb(room_size=0.04)])
+    board = Pedalboard([Reverb(room_size=0.03)])
     effected = board(audio, sample_rate)
     sf.write("2" + out, effected, sample_rate)
     

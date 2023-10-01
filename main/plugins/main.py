@@ -37,12 +37,14 @@ async def force_sub(id):
 async def new(event):
     
     # await event.forward_to(int(ACCESS_CHANNEL))
-    
-    if event.audio or 'audio' in event.file.mime_type:
+
+
+    if event.audio or 'audio' in event.file.mime_type or \
+    event.media and (str(event.file.name)).split(".")[-1] == "ogg":
         
         x = await force_sub(event.sender_id)
         if x != False:
-            return await event.reply("You've to join my parent channel to use this bot.", buttons=Button.url("Join now🎸", url="t.me/DroneBots"))
+            return await event.reply(⚠️ "You've to join my parent channels to use this bot.", buttons=[[Button.url("Join DroneBOTs", url="t.me/DroneBots")], [Button.url("Join SRC", url="t.me/DroneBots")]])
             
         if event.sender_id in process:
             return event.reply("Wait until your previous process finish!🕰")
@@ -71,7 +73,7 @@ async def new(event):
         except Exception as e:
             process.pop(process.index(int(event.sender_id)))
             print(e)
-            await reply.edit(f"Sorry! but Something went wrong, contact @TeamDrone.\n\n**ERROR:** {str(e)}")
+            await reply.edit(f"⚠️ Sorry! but Something went wrong, contact @TeamDrone.\n\n**ERROR:** {str(e)}")
             
             
                 
